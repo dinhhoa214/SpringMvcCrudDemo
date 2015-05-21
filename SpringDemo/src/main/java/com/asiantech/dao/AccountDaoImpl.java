@@ -50,10 +50,25 @@ public class AccountDaoImpl implements AccountDao {
 	}
 
 	public List<Account> getAll() {
-		String sql = "SELECT * FROM Account";
+		String sql = "SELECT * FROM Account limit 0,5"; 
 		List<Account> listAccount = new ArrayList<Account>();
 		listAccount = jdbcTemplate.query(sql, new AccountRowMapper());  
 		return listAccount;
 	}
+
+	public List<Account> getLimit(int limit, int off) {
+		String sql = "SELECT * FROM Account limit " + limit + " offset " + off ; 
+		List<Account> listAccount = new ArrayList<Account>();
+		listAccount = jdbcTemplate.query(sql, new AccountRowMapper());  
+		return listAccount; 
+	}
+
+	public int getCount() {
+		String sql = "SELECT COUNT(id) FROM Account";
+		int countRows = jdbcTemplate.queryForInt(sql);
+		return countRows;
+	}
+	
+	
 
 }

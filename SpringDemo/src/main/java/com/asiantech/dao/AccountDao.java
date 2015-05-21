@@ -4,8 +4,9 @@ import java.util.List;
 
 import com.asiantech.model.Account;
 
-public interface AccountDao { 
+public interface AccountDao {
 	public static String NAME = "accountDao";
+
 	// CRUD operations
 
 	// Save or Update
@@ -18,5 +19,11 @@ public interface AccountDao {
 	public void deleteById(int id);
 
 	// Get All
-	public List<Account> getAll(); 
+	public List<Account> getAll();
+
+	// Get Limit offset
+	public List<Account> getLimit(int limit,int off);
+	
+	// Get Count rows
+	public int getCount();
 }

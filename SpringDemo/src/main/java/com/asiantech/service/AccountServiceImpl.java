@@ -33,6 +33,16 @@ public class AccountServiceImpl implements AccountService{
 		listAccount = accdao.getAll();
 		return listAccount;
 	}
+
+	public List<Account> getLimit(int limit, int off) {
+		List<Account> listAccount = new ArrayList<Account>();
+		listAccount = accdao.getLimit(limit, off);
+		return listAccount;
+	}
+
+	public int getCount() { 
+		return accdao.getCount();
+	}
 	
 	
 }
