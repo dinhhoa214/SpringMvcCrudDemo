@@ -12,10 +12,11 @@
 
 	<!-- telling container to take care of annotations stuff -->
 	<context:annotation-config />
-
+	
 
 	<!-- declaring base package -->
 	<context:component-scan base-package="com.asiantech" />
+	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<mvc:annotation-driven />
 
 	<!-- adding view resolver to show jsp's on browser -->
@@ -25,6 +26,7 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
+	
 
 	<!-- declare datasource bean -->
 	<bean id="dataSource"

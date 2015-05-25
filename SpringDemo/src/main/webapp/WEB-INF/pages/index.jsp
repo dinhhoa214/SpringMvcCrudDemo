@@ -9,16 +9,8 @@
 <title>Spring MVC Demo</title>
 
 <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
-	rel="stylesheet">
-<script type='text/javascript'>
-    function showRecord(){ 
-     
-    	var num = document.getElementById("numRecord").value; 
-    	document.getElementById("numRecord").value = num;
-    	window.location = "getAccounts?record="+num;
-    	
-    }
-</script>	
+	rel="stylesheet"> 
+ 
 </head>
 <body>
 	<div class="container">
@@ -29,23 +21,38 @@
 		<div class="row">
 			<div class="col-sm-4">
 				<div class="form-group">
-					<label>Total: ${map.numRows} records.
+					<label>Total: ${map.numCountRows} records.
 					</label>
 				</div>
 			</div>
 			<div class="col-sm-4"><center> 
-				 <ul class="pagination pagination-sm">
-				 	<c:forEach var="i" begin="1" end="${map.numPages }"> 
-				  		<li><a href="getAccounts?record=${ i}">${ i}</a></li> 
+				 <ul class="pagination pagination-sm"> 
+				 	<c:forEach var="i" begin="1" end="${map.numPages }">  
+						<c:choose>
+						    <c:when test="${map.numOfPage eq  i}">
+						       <li class="active"><a href="getAccounts?record=${ i}">${i}</a></li> 
+						    </c:when> 
+						    <c:otherwise>
+						        <li><a href="getAccounts?record=${ i}">${i}</a></li> 
+						    </c:otherwise>
+						</c:choose>
+						
+				  		
 				  	</c:forEach>
-				</ul></center>
+				</ul></center>  
 			</div>
 			<div class="col-sm-4">
-				
-				<div class="form-group">
-					<p class="text-right"><label>Search all fileds: <input type="text">
-					</label></p>
-				</div>
+			 	<div class="col-sm-4">
+			 	</div>
+			    <div class="input-group">
+			      <p class="text-right">
+			      	<input type="text" class="form-control" placeholder="Search all files...">
+			      	<span class="input-group-btn">
+			        <button class="btn btn-default" type="button">Go!</button>
+			      	</span>
+			      </p>	
+			    </div><!-- /input-group --> 
+		 
 				
 			</div>
 		</div>
@@ -72,8 +79,8 @@
 							<td>${acc.time}</td>
 							<td>${acc.status}</td>
 							<td>${acc.isPublic}</td>
-							<td><a href="edit?id=${acc.id}">Edit</a></td>
-							<td><a href="delete?id=${acc.id}">Delete</a></td>
+							<td><a href="edit?id=${acc.id}&record=${map.numOfPage}">Edit  </a></td>
+							<td><a href="delete?id=${acc.id}&record=${map.numOfPage}">Delete</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -84,13 +91,12 @@
 				<a href="getAccounts?record=${map.numPages }" class="btn btn-info">Add new Account</a>
 			</div>
 			<div class="col-sm-4">
-				<form:form method="post" action="/SpringDemo/saveAccount"
-					modelAttribute="account">
+				<form:form id="defaultForm" method="post" class="form-horizontal"
+				 action="/SpringDemo/saveAccount?record=${map.numOfPage}" modelAttribute="account">
 					<table>
 						<tr>
 							<td>ID :</td>
-							<td><form:input path="id" value="${map.account.id}"
-									readonly="true" /></td>
+							<td><form:input path="id" value="${map.account.id}" readonly="true"/></td>
 						</tr>
 						<tr>
 							<td>First Name :</td>
@@ -98,8 +104,13 @@
 						</tr>
 						<tr>
 							<td>Time :</td>
-							<td><form:input path="time" value="${map.account.time}" /></td>
+							<td><form:input path="time" value="${map.account.time}" />
+							 
+                        </td>
 						</tr>
+						
+						
+						
 						<tr>
 							<td>Status :</td>
 							<td><form:select path="status">
@@ -126,11 +137,45 @@
 			<div class="col-sm-4">
 				<div class="alert alert-success">
 					<strong>Console:</strong> message.
+					
+					 
+					
 				</div>
 			</div>
 		</div>
+		
 	</div>
-	!!container>>
+<script type="text/javascript">
+$(document).ready(function() {
+	$('#defaultForm').bootstrapValidator({
+//      live: 'disabled',
+      message: 'This value is not valid',
+      feedbackIcons: {
+          valid: 'glyphicon glyphicon-ok',
+          invalid: 'glyphicon glyphicon-remove',
+          validating: 'glyphicon glyphicon-refresh'
+      },
+      fields: {
+          firstName: {
+              group: '.col-lg-4',
+              validators: {
+                  notEmpty: {
+                      message: 'The first name is required and cannot be empty'
+                  }
+              }
+          },
+          birthday: {
+              validators: {
+                  date: {
+                      format: 'YYYY/MM/DD',
+                      message: 'The birthday is not valid'
+                  }
+              }
+          } 
+      }
+    });
+});
+</script> 
 
 </body>
 </html>

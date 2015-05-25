@@ -1,6 +1,5 @@
 package com.asiantech.service;
- 
-import java.util.ArrayList;
+  
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired; 
@@ -29,19 +28,23 @@ public class AccountServiceImpl implements AccountService{
 	}
 
 	public List<Account> getAll() {
-		List<Account> listAccount = new ArrayList<Account>();
-		listAccount = accdao.getAll();
+		List<Account> listAccount = accdao.getAll();
+		 
 		return listAccount;
 	}
 
 	public List<Account> getLimit(int limit, int off) {
-		List<Account> listAccount = new ArrayList<Account>();
-		listAccount = accdao.getLimit(limit, off);
+		List<Account> listAccount = accdao.getLimit(limit, off);
 		return listAccount;
 	}
 
 	public int getCount() { 
 		return accdao.getCount();
+	}
+
+	public List<Account> search(String name) {
+		List<Account> listAccount = accdao.search(name);
+		return listAccount;
 	}
 	
 	

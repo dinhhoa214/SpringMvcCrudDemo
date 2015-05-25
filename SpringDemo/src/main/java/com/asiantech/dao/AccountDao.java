@@ -26,4 +26,7 @@ public interface AccountDao {
 	
 	// Get Count rows
 	public int getCount();
+	
+	// Search Account
+	public List<Account> search(String name);
 }

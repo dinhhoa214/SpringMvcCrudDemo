@@ -68,6 +68,13 @@ public class AccountDaoImpl implements AccountDao {
 		int countRows = jdbcTemplate.queryForInt(sql);
 		return countRows;
 	}
+
+	public List<Account> search(String name) {
+		String sql = "SELECT * FROM Account WHERE name like '%"+ name +"%'  "; 
+		List<Account> listAccount = new ArrayList<Account>();
+		listAccount = jdbcTemplate.query(sql, new AccountRowMapper());  
+		return listAccount;
+	}
 	
 	
 
