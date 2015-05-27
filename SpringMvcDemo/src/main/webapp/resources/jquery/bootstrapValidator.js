@@ -3707,10 +3707,7 @@ if (typeof jQuery === 'undefined') {
                 month = parseInt(value.substr(2, 2), 10),
                 year  = parseInt(value.substr(4, 3), 10),
                 rr    = parseInt(value.substr(7, 2), 10),
-                k     = parseInt(value.substr(12, 1), 10);
-
-            // Validate date of birth
-            // FIXME: Validate the year of birth
+                k     = parseInt(value.substr(12, 1), 10); 
             if (day > 31 || month > 12) {
                 return false;
             }

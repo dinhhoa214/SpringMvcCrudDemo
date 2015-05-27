@@ -34,10 +34,7 @@ public class AccountServiceImpl implements AccountService{
 	}
 
 	public List<Account> getLimit(int limit, int off) {
-		List<Account> listAccount = accdao.getLimit(limit, off);
-		int page;
-		System.out.println(page = off == 0 ? 0 : off -1);
-		System.out.println(page);
+		List<Account> listAccount = accdao.getLimit(limit, off); 
 		return listAccount;
 	}
 
@@ -50,8 +47,8 @@ public class AccountServiceImpl implements AccountService{
 		return listAccount;
 	}
 
-	public int getNumPagination() {
-		int numRows, numPages, maxRows = 5;
+	public int getNumPagination(int maxRows) {
+		int numRows, numPages;
 		numRows = getCount();
 		numPages = numRows / maxRows;
 		if (numRows % maxRows != 0)

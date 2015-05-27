@@ -17,8 +17,7 @@ public class AccountDaoImpl implements AccountDao {
 	public AccountDaoImpl() {  
 	}
 
-	public void save(Account account) {
-		System.out.println(account.getId()); 
+	public void save(Account account) { 
 		if (account.getId() > 0) {
 			// update
 			String sql = "UPDATE Account SET name=?, modiferTime=?, status=?, isPublic=? WHERE id=?";
@@ -36,11 +35,9 @@ public class AccountDaoImpl implements AccountDao {
 	}
  
 	public Account getById(int id) {
-		String sql = "SELECT * FROM Account WHERE id = ?";
-
+		String sql = "SELECT * FROM Account WHERE id = ?"; 
 		Account account = (Account) jdbcTemplate.queryForObject(sql,
-				new Object[] { id }, new AccountRowMapper());
-
+				new Object[] { id }, new AccountRowMapper()); 
 		return account;
 	}
 

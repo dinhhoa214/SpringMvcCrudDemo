@@ -31,5 +31,5 @@ public interface AccountService {
 	public List<Account> search(String name);
 	
 	// Get Number Paging
-	public int getNumPagination() ;
+	public int getNumPagination(int maxRows) ;
 }
