@@ -52,10 +52,9 @@ public class AccountControllerNew {
 	}
 	
 	@RequestMapping(value ="/delete", method = RequestMethod.POST) 
-	public String deleteAccount(@RequestParam int id) { 
-		accountSv.deleteById(id);
-		 
-		return "Deleted account ID = "+id;
+	public int deleteAccount(@RequestParam int id) { 
+		accountSv.deleteById(id); 
+		return id;
 	}
 
 	@RequestMapping("/edit")
@@ -68,11 +67,7 @@ public class AccountControllerNew {
 		// redirectAttrs.addAttribute(account);
 		return "redirect:/account/getList?record=" + record +"&maxRows=" + maxRows;
 	}
-	
-	@RequestMapping("/vali")
-	public String getVali() { 
-		return "/account/html5";
-	}
+	 
 
 	 
  
