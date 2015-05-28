@@ -53,7 +53,7 @@ function doAjaxPostDelete(id){
       	            	$.ajax({
 	    	      			  type: "POST",
 	    	      			  url: "delete",
-	    	      			  data: "id="+idNo + "&record=" + page, 
+	    	      			  data: "id="+idNo, 
 	    	      			  success: function(response){   
 	    	      				  alert(response );  
 	    	      	 		  }, 
